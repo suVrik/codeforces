@@ -1,0 +1,25 @@
+#pragma once
+
+#include "includes.h"
+
+// https://e-maxx.ru/algo/prefix_function
+
+template <typename T = size_t>
+vector<T> prefix_function(const string& s) {
+    vector<T> result(s.size());
+    for (T i = 1; i < T(s.size()); ++i) {
+        T j = result[i - 1];
+        while (j > 0 && s[i] != s[j]) {
+            j = result[j - 1];
+        }
+        if (s[i] == s[j]) {
+            j++;
+        }
+        result[i] = j;
+    }
+    return result;
+}
+
+// string: 1212123#12121212
+// prefix: 0012340#12345656
+//                       ^ the purpose of inner while loop
