@@ -28,8 +28,9 @@ typedef long double ld;
 
 int main() {
 #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    FILE* input_txt = freopen("input.txt", "r", stdin);
+    FILE* output_txt = freopen("output.txt", "w", stdout);
+    assert(input_txt != nullptr && output_txt != nullptr);
 #else
     cin.tie(nullptr);
     ios_base::sync_with_stdio(false);
