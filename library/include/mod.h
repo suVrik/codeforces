@@ -2,6 +2,7 @@
 
 #include "includes.h"
 
+// Модульная арифметика.
 // https://brestprog.by/topics/modulo/
 
 ll add(ll a, ll b, ll mod) {

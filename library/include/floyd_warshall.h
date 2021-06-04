@@ -2,6 +2,8 @@
 
 #include "includes.h"
 
+// Алгоритм Флойда-Уоршелла нахождения кратчайших путей между всеми парами вершин.
+// Floyd-Warshall - finding shortest paths between all pairs of vertices.
 // http://e-maxx.ru/algo/floyd_warshall_algorithm
 
 template <typename T>
@@ -17,3 +19,5 @@ void floyd_warshall(vector<vector<T>>& adj_mat) {
         }
     }
 }
+
+// TODO: Reconstruct path.

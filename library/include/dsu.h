@@ -2,9 +2,10 @@
 
 #include "includes.h"
 
+// Система непересекающихся множеств. Disjoint-set.
 // http://e-maxx.ru/algo/dsu
 
-template <typename T>
+template <typename Index>
 struct DSU {
     void build(size_t size) {
         parent.assign(size, 0);
@@ -15,9 +16,9 @@ struct DSU {
         rank.assign(size, 0);
     }
 
-    T find_set(T v) {
+    Index find_set(Index v) {
         assert(!parent.empty());
-        assert(v < T(parent.size()));
+        assert(v < Index(parent.size()));
 
         if (v == parent[v]) {
             return v;
@@ -25,10 +26,10 @@ struct DSU {
         return parent[v] = find_set(parent[v]);
     }
 
-    void union_sets(T a, T b) {
+    void union_sets(Index a, Index b) {
         assert(!parent.empty());
-        assert(a < T(parent.size()));
-        assert(b < T(parent.size()));
+        assert(a < Index(parent.size()));
+        assert(b < Index(parent.size()));
 
         a = find_set(a);
         b = find_set(b);
@@ -43,6 +44,6 @@ struct DSU {
         }
     }
 
-    vector<T> parent;
-    vector<T> rank;
+    vector<Index> parent;
+    vector<Index> rank;
 };

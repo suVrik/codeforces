@@ -2,6 +2,8 @@
 
 #include "includes.h"
 
+// Алгоритм Евклида нахождения наибольшего общего делителя.
+// Euclidean algorithm for computing the greatest common divisor.
 // http://e-maxx.ru/algo/euclid_algorithm
 
 ll gcd(ll a, ll b) {

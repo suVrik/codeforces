@@ -3,14 +3,18 @@
 #include "includes.h"
 #include "dsu.h"
 
-template <typename T, typename W>
-vector<pair<T, T>> kruskal(size_t num_vertices, vector<tuple<W, T, T>>& edges) {
+// Минимальное остовное дерево. Алгоритм Крускала с системой непересекающихся множеств.
+// Minimum spanning tree. Kruskal algorithm with disjoint-set-union.
+// http://e-maxx.ru/algo/mst_kruskal_with_dsu
+
+template <typename Index, typename Cost>
+vector<pair<Index, Index>> kruskal(size_t num_vertices, vector<tuple<Cost, Index, Index>>& edges) {
     sort(edges.begin(), edges.end());
 
-    DSU<T> dsu;
+    DSU<Index> dsu;
     dsu.build(num_vertices);
 
-    vector<pair<T, T>> result;
+    vector<pair<Index, Index>> result;
     for (size_t i = 0; i < edges.size(); i++) {
         const auto& [w, a, b] = edges[i];
         if (dsu.find_set(a) != dsu.find_set(b)) {

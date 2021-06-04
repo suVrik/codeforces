@@ -2,9 +2,11 @@
 
 #include "includes.h"
 
+// Префикс-функция. Алгоритм Кнута-Морриса-Пратта.
+// Prefix function. Knuth–Morris–Pratt algorithm.
 // https://e-maxx.ru/algo/prefix_function
 
-template <typename T = size_t>
+template <typename T = string::size_type>
 vector<T> prefix_function(const string& s) {
     vector<T> result(s.size());
     for (T i = 1; i < T(s.size()); ++i) {

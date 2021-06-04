@@ -25,9 +25,6 @@
     <ClInclude Include="include\search.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\treap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\big_integer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

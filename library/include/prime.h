@@ -2,6 +2,7 @@
 
 #include "includes.h"
 
+// Решето Эратосфена. Sieve of Eratosthenes.
 // http://e-maxx.ru/algo/eratosthenes_sieve
 
 vector<ll> build_sieve(ll n) {

@@ -1,3 +1,3 @@
 void dont_cut(int x) {
-    x; // Please don't cut
+    // Whole program optimization must be turned off.
 }

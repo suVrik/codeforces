@@ -2,14 +2,18 @@
 
 #include "includes.h"
 
-template <typename T, typename U>
-pair<vector<T>, vector<U>> dijkstra(const vector<vector<pair<T, U>>>& adj_list, T start) {
-    vector<T> parent(adj_list.size(), numeric_limits<T>::max());
+// Нахождение кратчайших путей от заданной вершины до всех остальных вершин алгоритмом Дейкстры для разреженных графов.
+// Dijkstra - finding shortest paths from given vertex to other vertices on sparse graphs.
+// http://e-maxx.ru/algo/dijkstra_sparse
 
-    vector<U> cost(adj_list.size(), numeric_limits<U>::max());
-    cost[start] = U();
+template <typename Index, typename Cost>
+pair<vector<Index>, vector<Cost>> dijkstra(const vector<vector<pair<Index, Cost>>>& adj_list, Index start) {
+    vector<Index> parent(adj_list.size(), numeric_limits<Index>::max());
 
-    priority_queue<pair<U, T>, vector<pair<U, T>>, greater<pair<U, T>>> open;
+    vector<Cost> cost(adj_list.size(), numeric_limits<Cost>::max());
+    cost[start] = Cost();
+
+    priority_queue<pair<Cost, Index>, vector<pair<Cost, Index>>, greater<pair<Cost, Index>>> open;
     open.emplace(0, start);
 
     while (!open.empty()) {
@@ -18,8 +22,8 @@ pair<vector<T>, vector<U>> dijkstra(const vector<vector<pair<T, U>>>& adj_list, 
 
         if (vcost == cost[vidx]) {
             for (size_t i = 0; i < adj_list[vidx].size(); i++) {
-                T nidx = adj_list[vidx][i].first;
-                U ncost = vcost + adj_list[vidx][i].second;
+                Index nidx = adj_list[vidx][i].first;
+                Cost ncost = vcost + adj_list[vidx][i].second;
                 if (cost[nidx] > ncost) {
                     cost[nidx] = ncost;
                     parent[nidx] = vidx;

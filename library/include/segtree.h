@@ -2,11 +2,12 @@
 
 #include "includes.h"
 
+// Дерево отрезков. Segment tree.
 // http://e-maxx.ru/algo/segment_tree
 
 namespace query_on_range_change_single {
 
-template <typename T>
+template <typename Value>
 class SegmentTree {
 public:
     void build(size_t size_) {
@@ -14,42 +15,42 @@ public:
         size = size_;
     }
 
-    void build(T* data, size_t size_) {
+    void build(Value* data, size_t size_) {
         build(size_);
         build(data, 1, 0, size - 1);
     }
 
-    void build(const vector<T>& data) {
+    void build(const vector<Value>& data) {
         build(data.data(), data.size());
     }
 
-    T sum(size_t l, size_t r) {
+    Value sum(size_t l, size_t r) {
         r = min(r, size - 1);
         l = min(l, r);
         return sum(1, 0, size - 1, l, r);
     }
 
-    void update(size_t pos, T value) {
+    void update(size_t pos, Value value) {
         if (pos < size) {
             update(1, 0, size - 1, pos, value);
         }
     }
 
-    // (*Pred)(size_t idx, T value)
+    // (*Pred)(size_t idx, Value value)
     template <typename Pred>
     void traverse(const Pred& pred) {
         traverse(1, 0, size - 1, pred);
     }
 
-    vector<T> data;
+    vector<Value> data;
     size_t size;
 
 private:
-    T merge(T l, T r) {
+    Value merge(Value l, Value r) {
         return l + r;
     }
 
-    void build(T* data, size_t v, size_t tl, size_t tr) {
+    void build(Value* data, size_t v, size_t tl, size_t tr) {
         if (tl == tr) {
             data[v] = data[tl];
         } else {
@@ -60,20 +61,20 @@ private:
         }
     }
 
-    T sum(size_t v, size_t tl, size_t tr, size_t l, size_t r) {
+    Value sum(size_t v, size_t tl, size_t tr, size_t l, size_t r) {
         if (l > r) {
             return 0;
         } else if (l == tl && r == tr) {
             return data[v];
         } else {
             size_t tm = tl + (tr - tl) / 2;
-            T ls = sum(v * 2, tl, tm, l, min(r, tm));
-            T rs = sum(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r);
+            Value ls = sum(v * 2, tl, tm, l, min(r, tm));
+            Value rs = sum(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r);
             return merge(ls, rs);
         }
     }
 
-    void update(size_t v, size_t tl, size_t tr, size_t pos, T value) {
+    void update(size_t v, size_t tl, size_t tr, size_t pos, Value value) {
         if (tl == tr) {
             data[v] = value;
         } else {
@@ -103,7 +104,7 @@ private:
 
 namespace change_on_range_query_single {
 
-template <typename T>
+template <typename Value>
 class SegmentTree {
 public:
     void build(size_t size_) {
@@ -111,37 +112,37 @@ public:
         size = size_;
     }
 
-    void build(T* data, size_t size_) {
+    void build(Value* data, size_t size_) {
         build(size_);
         build(data, 1, 0, size - 1);
     }
 
-    void build(const vector<T>& data) {
+    void build(const vector<Value>& data) {
         build(data.data(), data.size());
     }
 
-    void add(size_t l, size_t r, T value) {
+    void add(size_t l, size_t r, Value value) {
         add(1, 0, size - 1, min(l, min(r, size - 1)), min(r, size - 1), value);
     }
 
-    T get(size_t pos) {
+    Value get(size_t pos) {
         if (pos < size) {
             return get(1, 0, size - 1, pos);
         }
-        return T();
+        return Value();
     }
 
-    // (*Pred)(size_t idx, T value)
+    // (*Pred)(size_t idx, Value value)
     template <typename Pred>
     void traverse(const Pred& pred) {
         traverse(1, 0, size - 1, pred);
     }
 
-    vector<T> data;
+    vector<Value> data;
     size_t size;
 
 private:
-    void build(T* data, size_t v, size_t tl, size_t tr) {
+    void build(Value* data, size_t v, size_t tl, size_t tr) {
         if (tl == tr) {
             data[v] = data[tl];
         } else {
@@ -160,7 +161,7 @@ private:
         }
     }
 
-    void add(size_t v, size_t tl, size_t tr, size_t l, size_t r, T value) {
+    void add(size_t v, size_t tl, size_t tr, size_t l, size_t r, Value value) {
         if (l > r) {
             return;
         } else if (l == tl && r == tr) {
@@ -173,7 +174,7 @@ private:
         }
     }
 
-    T get(size_t v, size_t tl, size_t tr, size_t pos) {
+    Value get(size_t v, size_t tl, size_t tr, size_t pos) {
         if (tl == tr) {
             return data[v];
         } else {

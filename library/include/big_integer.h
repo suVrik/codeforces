@@ -2,6 +2,7 @@
 
 #include "includes.h"
 
+// Длинная арифметика. Big integer.
 // http://e-maxx.ru/algo/big_integer
 //
 // Problems:
@@ -13,7 +14,12 @@ public:
     static constexpr int BASE = 1000000000;
     static constexpr int BASE_DIGITS = 9;
 
-    BigInteger() = default;
+    BigInteger(ll integer = 0) {
+        while (integer > 0) {
+            value.push_back(integer % BASE);
+            integer /= BASE;
+        }
+    }
 
     BigInteger(const string& str) {
         for (int i = int(str.size()); i > 0; i -= BASE_DIGITS) {
@@ -24,13 +30,6 @@ public:
             }
         }
         trim();
-    }
-
-    BigInteger(ll integer) {
-        while (integer > 0) {
-            value.push_back(integer % BASE);
-            integer /= BASE;
-        }
     }
 
     operator string() const {

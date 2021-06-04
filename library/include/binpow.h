@@ -2,6 +2,7 @@
 
 #include "includes.h"
 
+// Бинарное возведение в степень. Binary exponentiation.
 // http://e-maxx.ru/algo/binary_pow
 
 ll binpow(ll a, ll n) {
