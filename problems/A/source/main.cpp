@@ -26,6 +26,10 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef long double ld;
 
+void solve() {
+    //
+}
+
 int main() {
 #ifndef ONLINE_JUDGE
     FILE* input_txt = freopen("input.txt", "r", stdin);
@@ -40,7 +44,7 @@ int main() {
     cin >> t_;
     
     while (t_--) {
-        //
+        solve();
     }
 
     return 0;
