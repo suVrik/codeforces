@@ -6,6 +6,9 @@
 // Euclidean algorithm for computing the greatest common divisor.
 // http://e-maxx.ru/algo/euclid_algorithm
 
+// gcd(x, 0) = gcd(0, x) = x
+// gcd(0, 0) = 0
+
 ll gcd(ll a, ll b) {
     while (b != 0) {
         a %= b;

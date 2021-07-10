@@ -15,9 +15,9 @@ public:
         size = size_;
     }
 
-    void build(Value* data, size_t size_) {
+    void build(Value* data_, size_t size_) {
         build(size_);
-        build(data, 1, 0, size - 1);
+        build(data_, 1, 0, size - 1);
     }
 
     void build(const vector<Value>& data) {
@@ -47,16 +47,17 @@ public:
 
 private:
     Value merge(Value l, Value r) {
+        // gcd(l, r) / min(l, r) / max(l, r) ...
         return l + r;
     }
 
-    void build(Value* data, size_t v, size_t tl, size_t tr) {
+    void build(Value* data_, size_t v, size_t tl, size_t tr) {
         if (tl == tr) {
-            data[v] = data[tl];
+            data[v] = data_[tl];
         } else {
             size_t tm = tl + (tr - tl) / 2;
-            build(data, v * 2, tl, tm);
-            build(data, v * 2 + 1, tm + 1, tr);
+            build(data_, v * 2, tl, tm);
+            build(data_, v * 2 + 1, tm + 1, tr);
             data[v] = merge(data[v * 2], data[v * 2 + 1]);
         }
     }
