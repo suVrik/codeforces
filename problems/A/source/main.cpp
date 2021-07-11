@@ -43,7 +43,7 @@ int main() {
     int t_;
     cin >> t_;
     
-    while (t_--) {
+    for (int i_ = 0; i_ < t_; i_++) {
         solve();
     }
 
